@@ -6,8 +6,7 @@ import com.project.fitness.model.ActivityType;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.hibernate.annotations.CreationTimestamp;
-import org.hibernate.annotations.UpdateTimestamp;
+
 
 import java.time.LocalDateTime;
 import java.util.Map;
@@ -25,13 +24,8 @@ public class ActivityResponse {
     private  Integer duration;
     private  Integer caloriesBurned;
     private LocalDateTime startTime;
-    @CreationTimestamp
     private LocalDateTime createAt;
-    @UpdateTimestamp
     private LocalDateTime updateAt;
-
-
-
 
 
 }

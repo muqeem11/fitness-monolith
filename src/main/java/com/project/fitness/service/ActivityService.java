@@ -7,10 +7,11 @@ import com.project.fitness.model.User;
 import com.project.fitness.repository.ActivityRepository;
 import com.project.fitness.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -35,15 +36,25 @@ public class ActivityService {
 
     private ActivityResponse mapToResponse(Activity savedActivity) {
         ActivityResponse activityResponse = new ActivityResponse();
+
         activityResponse.setId(savedActivity.getId());
         activityResponse.setUserId(savedActivity.getUser().getId());
         activityResponse.setType(savedActivity.getType());
         activityResponse.setDuration(savedActivity.getDuration());
-        activityResponse.setCaloriesBurned(activityResponse.getCaloriesBurned());
+        activityResponse.setCaloriesBurned(savedActivity.getCaloriesBurned());
         activityResponse.setStartTime(savedActivity.getStartTime());
         activityResponse.setAdditionalMetrics(savedActivity.getAdditionalMetrics());
-        activityResponse.setCreateAt(activityResponse.getCreateAt());
-        activityResponse.setUpdateAt(activityResponse.getUpdateAt());
+        activityResponse.setCreateAt(savedActivity.getCreateAt());
+        activityResponse.setUpdateAt(savedActivity.getUpdateAt());
+
         return activityResponse;
+    }
+
+    public List<ActivityResponse> getUserActivities(String userId) {
+        List<Activity> activityList = activityRepository.findByUserId(userId);
+        return activityList
+                .stream()
+                .map(this::mapToResponse)
+                .collect(Collectors.toList());
     }
 }
