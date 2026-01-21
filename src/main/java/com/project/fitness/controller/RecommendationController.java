@@ -15,7 +15,6 @@ import java.util.List;
 public class RecommendationController {
     private final RecommendationService recommendationService;
 
-
     @PostMapping("/generate")
     public ResponseEntity<Recommendation> generateRecommendation(
              @RequestBody RecommendationRequest request

@@ -20,7 +20,6 @@ public class ActivityController {
 
     @PostMapping
     public  ResponseEntity<ActivityResponse> tackActivity(@RequestBody ActivityRequest activityRequest) {
-
         return ResponseEntity.ok(activityService.trackActivity(activityRequest));
     }
      @GetMapping
